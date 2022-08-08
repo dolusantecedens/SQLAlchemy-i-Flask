@@ -1,32 +1,29 @@
 from flask import Flask, request, flash, url_for, redirect, render_template
 from forms import  AuthorForm, BookForm
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import create_engine, Table, Column, Integer, String, MetaData
 import sqlite3
 from sqlite3 import Error
-app=Flask(__name__)
-
-
-
-def create_connection_in_memory():
-   """ create a database connection to a SQLite database """
-   conn = None
-   try:
-       conn = sqlite3.connect(":memory:")
-       print(f"Connected, sqlite version: {sqlite3.version}")
-   except Error as e:
-       print(e)
-   finally:
-       if conn:
-           conn.close()
+import os
 
 
 
 
+engine = create_engine('sqlite:///library.db')
+
+meta = MetaData()
+
+books = Table(
+   'title', meta,
+   Column('id', Integer, primary_key=True),
+   Column('name', String),
+   Column('lastname', String),
+)
+
+meta.create_all(engine)
+print(engine.table_names())
+
+ 
 
 
 
-
-
-
-if __name__ == '__main__':
-   create_connection_in_memory()
