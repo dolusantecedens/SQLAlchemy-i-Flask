@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang = "en">
+   <head></head>
+   <body>
+      
+      
+      <h3> Biblioteka </h3>
+      <hr/>
+      {%- for message in get_flashed_messages() %}
+         {{ message }}
+      {%- endfor %}
+		
+      <h3>Książki (<a href = "{{ url_for('new_book') }}">Dodaj Książkę
+         </a>)</h3>
+      
+      <table>
+         <thead>
+            <tr>
+               <th>Tytuł</th>
+               <th>Gatunek</th>
+               <th>Status</th>
+               <th>Autor</th>
+            </tr>
+         </thead>
+         
+         <tbody>
+            {% for book_ in book %}
+               <tr>
+                  <td><a href="/edit/book/{{ book_.id }}">{{ book_.title }}</a></td>
+                  <td>{{ book_.gnere }}</td>
+                  <td>{{ book_.status }}</td>
+                  <td>{{ book_.author_id }}</td>
+               </tr>
+            {% endfor %}
+         </tbody>
+      </table>
+
+      <h3>Autorzy (<a href = "{{ url_for('new_author') }}">Dodaj Autora
+    </a>)</h3>
+ 
+ <table>
+    <thead>
+       <tr>
+          <th>Imie</th>
+          <th>Nazwisko</th>
+          <th>Książki</th>
+       </tr>
+    </thead>
+    
+    <tbody>
+       {% for author_ in author %}
+          <tr>
+             <td><a href="/edit/author/{{ author_.id }}">{{ author_.name }}</a></td>
+             <td>{{ author_.surname }}</td>
+             <td>{{ author_.book_id }}</td>
+          </tr>
+       {% endfor %}
+    </tbody>
+ </table>
+<br>
+ <a href="/combine"> Przydziel autora do książki</a>
+ <br>
+ <a href="/acess"> Tabela dostępności</a>
+   </body>
+</html>

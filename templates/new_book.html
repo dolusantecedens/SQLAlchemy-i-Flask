@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+   <body>
+   
+      <h3>Książka</h3>
+      <hr/>
+      <h3>
+         <a href = "{{ url_for('show_all') }}">Home</a>
+      </h3>
+      {%- for category, message in get_flashed_messages(with_categories = true) %}
+         <div class = "alert alert-danger">
+            {{ message }}
+         </div>
+      {%- endfor %}
+      <form method="POST" action="/new/book">
+         {{ form.hidden_tag() }}
+         <table>
+             {% for field in form if field.widget.input_type != 'hidden' %}
+                 <tr>
+                     <th>{{ field.label }}{% if field.flags.required %}*{% endif %}</th>
+                     <td>{{ field }}</td>
+                 </tr>
+             {% endfor %}
+         </table>
+         <input type="submit" value="Go">
+     </form>
+      
+   </body>
+</html>

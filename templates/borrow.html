@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form method="post" action="/borrow">
+    <select name="book" id="book">
+        {% for book in books %}
+        <option value="{{book.id}}">{{book.title}}</option>
+        {% endfor %}
+     </select>
+     <input type="submit" value="porzycz">
+    </form>
+    <form method="post" action="/return">
+        <select name="book" id="book">
+            {% for book in books %}
+            <option value="{{book.id}}">{{book.title}}</option>
+            {% endfor %}
+         </select>
+         <input type="submit" value="oddaj">
+        </form>
+        
+        <table>
+            <thead>
+               <tr>
+                  <th>Data porzyczenia</th>
+                  <th>Data zwrotu</th>
+                  <th>Książki</th>
+               </tr>
+            </thead>
+            
+            <tbody>
+               {% for acess_ in acess %}
+                  <tr>
+                     <td>{{ acess_.borrow_date }}</td>
+                     <td>{{ acess_.return_date }}</td>
+                     <td>{{ acess_.book_id }}</td>
+                  </tr>
+               {% endfor %}
+            </tbody>
+         </table>
+</body>
+</html>

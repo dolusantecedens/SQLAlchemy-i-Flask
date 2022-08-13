@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Przyłączenie</title>
+</head>
+<body>
+    <form action = "/combine" method = "post">
+        <label for="book"> Książka:</label>
+        <select name="book" id="book">
+           {% for book in books %}
+           <option value="{{book.id}}">{{book.title}}</option>
+           {% endfor %}
+        </select>
+        <label for="autor"> Autor:</label>
+        <select name="author" id="author">
+           {% for author in authors %}
+           <option value="{{author.id}}">{{author.name}}{{author.surname}}</option>
+           {% endfor %}
+        </select>
+        <input type = "submit" value = "Submit" />
+     </form>
+</body>
+</html>
